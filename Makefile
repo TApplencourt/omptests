@@ -1,27 +1,3 @@
-
-#
-# Check if some required definitions were made by the user.
-#
-
-ifeq ($(HOSTRTL),)
-  $(error HOSTRTL is not set)
-endif
-ifeq ($(TARGETRTL),)
-  $(error TARGETRTL is not set)
-endif
-ifeq ($(GLOMPRTL),)
-  $(error GLOMPRTL is not set)
-endif
-ifeq ($(LLVMBIN),)
-  $(error LLVMBIN is not set)
-endif
-
-export HOSTRTL
-export TARGETRTL
-export GLOMPRTL
-export LLVMBIN
-export OMPTESTS_CUDA_COMPUTE_CAPABILITY
-
 #
 # Look for the testcase folders
 #
@@ -31,10 +7,13 @@ ifeq ($(TEST_FOLDERS),)
 
   TEST_FOLDERS := $(wildcard t-*)
 
+  # Note of them are present in the file
+  
   # Check if we are using LOMP - if so, add special tests for it.
-  ifneq ($(wildcard $(HOSTRTL)/libxlsmp.so),)
-		TEST_FOLDERS += $(wildcard tlomp-*)
-  endif
+  #ifneq ($(wildcard $(HOSTRTL)/libxlsmp.so),)
+  #		TEST_FOLDERS += $(wildcard tlomp-*)
+  #endif
+
   ifeq ($(machine),ppc64)
 		TEST_FOLDERS += $(wildcard tp7-*)
   endif
